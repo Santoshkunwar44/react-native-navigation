@@ -1,8 +1,25 @@
-import React from 'react'
-import { SafeAreaView ,StyleSheet ,FlatList } from 'react-native'
+import React, { useLayoutEffect } from 'react'
+import { SafeAreaView ,StyleSheet ,FlatList, Pressable ,Image } from 'react-native'
 import { tweets } from '../../data/tweet'
 import Tweet from '../../components/Tweet'
+import { useNavigation } from '@react-navigation/native'
 const Feed = () => {
+  const navigation =useNavigation()
+
+  useLayoutEffect(()=>{
+    navigation.setOptions({
+      headerLeft:()=>(
+        <Pressable onPress={()=>navigation.openDrawer()}>
+            <Image
+            src={"https://images.pexels.com/photos/18028245/pexels-photo-18028245/free-photo-of-japanese-chin-dog-sitting-on-wooden-table.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"}
+            style={{width:40,height:40,borderRadius:100,objectFit:"cover",marginLeft:40}}
+            />
+
+        </Pressable>
+      )
+    })
+  },[])
+
   return (
     <SafeAreaView style={{flex:1,padding:20}}>
       <FlatList

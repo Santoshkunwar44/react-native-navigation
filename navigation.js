@@ -1,13 +1,21 @@
 import {NavigationContainer} from "@react-navigation/native"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
+import {createDrawerNavigator} from '@react-navigation/drawer'
 import Notification from "./screens/TabScreen/Notification"
 import Setting from "./screens/TabScreen/Setting"
 import Feed from "./screens/TabScreen/Feed"
 import { Ionicons } from '@expo/vector-icons';
 import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
+import Payment from "./screens/drawerScreen/payment";
 
-
+ const Drawer = createDrawerNavigator();
+function DrawerGroup (){
+    return <Drawer.Navigator screenOptions={{headerShown:false}}>
+        <Drawer.Screen  name="homeStackGroup"  component={HomeStackGroup}/>
+        <Drawer.Screen name="Payment" component={Payment}/>
+    </Drawer.Navigator>
+}
 
 const HomeStack = createNativeStackNavigator()
 function HomeStackGroup(){
@@ -48,10 +56,12 @@ function TabGroup(){
     </Tab.Navigator>
 }
 
+
+
 export const Navigation=()=>{
     return (
         <NavigationContainer >
-            <HomeStackGroup/>
+            <DrawerGroup/>
         </NavigationContainer>
     )
 }
