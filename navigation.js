@@ -1,9 +1,24 @@
 import {NavigationContainer} from "@react-navigation/native"
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs"
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import Notification from "./screens/TabScreen/Notification"
 import Setting from "./screens/TabScreen/Setting"
 import Feed from "./screens/TabScreen/Feed"
 import { Ionicons } from '@expo/vector-icons';
+import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
+
+
+
+const HomeStack = createNativeStackNavigator()
+function HomeStackGroup(){
+    return <HomeStack.Navigator>
+         <HomeStack.Screen name="TabGroup" component={TabGroup} options={{headerShown:false}}/>
+         <HomeStack.Screen name="TweetDetails" component={TweetDetailsScreen} options={{
+            presentation:"fullScreenModal"
+         }}/>
+    </HomeStack.Navigator>
+}
+
 
 const Tab = createBottomTabNavigator()
 function TabGroup(){
@@ -25,7 +40,9 @@ function TabGroup(){
     })}
 
     >
-        <Tab.Screen name="Feed" component={Feed}/>
+        <Tab.Screen name="Feed" component={Feed} options={{
+            tabBarLabel:"@santosh",
+        }}/>
         <Tab.Screen name="Setting" component={Setting}/>
         <Tab.Screen name="Notification" component={Notification}/>
     </Tab.Navigator>
@@ -33,8 +50,8 @@ function TabGroup(){
 
 export const Navigation=()=>{
     return (
-        <NavigationContainer>
-            <TabGroup/>
+        <NavigationContainer >
+            <HomeStackGroup/>
         </NavigationContainer>
     )
 }

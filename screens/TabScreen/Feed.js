@@ -1,11 +1,10 @@
 import React from 'react'
-import {View,Text} from "react-native"
 import { SafeAreaView ,StyleSheet ,FlatList } from 'react-native'
 import { tweets } from '../../data/tweet'
 import Tweet from '../../components/Tweet'
 const Feed = () => {
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex:1,padding:20}}>
       <FlatList
         data={tweets.slice(0, 30)}
         keyExtractor={(item) => {
